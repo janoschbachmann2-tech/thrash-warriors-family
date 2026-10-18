@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: trash-warriors-family
+    runtime: node
+    plan: starter
+    region: frankfurt
+    buildCommand: node --check server.mjs
+    startCommand: node server.mjs
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: SETUP_KEY
+        generateValue: true
+    disk:
+      name: family-save
+      mountPath: /var/data
+      sizeGB: 1
